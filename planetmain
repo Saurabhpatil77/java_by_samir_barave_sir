@@ -1,0 +1,88 @@
+package day2;
+
+public class Planet {
+	private String name;
+	private int moons;
+	
+	public Planet() {
+		name = "Earth";
+		moons = 1;
+	}
+	
+	public Planet(String name, int moons) {
+		this.name = name;
+		this.moons = moons;
+	}
+
+	public Planet(int moons, String name) {
+		this.moons = moons;
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getMoons() {
+		return moons;
+	}
+	public void setMoons(int moons) {
+		this.moons = moons;
+	}
+	public void assignValues() {
+		name = "Earth";
+		moons = 1;
+	}
+	public void assignValues(String nm, int mn) {
+		name = nm;
+		moons = mn;
+	}
+	public void assignValues(int mn, String nm) {
+		name = nm;
+		moons = mn;
+	}
+	/*public void assignValues(String x, String y) {
+		
+	}*/
+	
+}
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+package day2;
+
+public class PlanetMain {
+
+	public static void main(String[] args) {
+		Planet myPlanet = new Planet();
+		myPlanet.assignValues();
+		
+		Planet bigPlanet = new Planet();
+		bigPlanet.assignValues("Jupiter", 16);
+		
+		Planet hottestPlanet = new Planet();
+		hottestPlanet.assignValues(1, "Mercuty");
+		
+		//myPlanet.assignValues("Earth"); Gives error as assignValues(String) is not available
+		
+		Planet ourPlanet = new Planet();
+		
+		Planet interestingPlanet = new Planet("Saturn", 14);
+		
+		Planet shiningPlanet = new Planet(2, "Venus");
+		
+		System.out.println(ourPlanet.getName() + ", " + ourPlanet.getMoons());
+		System.out.println(interestingPlanet.getName() + ", " + interestingPlanet.getMoons());
+		System.out.println(shiningPlanet.getName() + ", " + shiningPlanet.getMoons());
+		
+		
+
+	}
+
+}
