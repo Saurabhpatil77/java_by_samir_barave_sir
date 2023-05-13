@@ -1,0 +1,232 @@
+Building Classes in Java
+	A class may have several declarations:
+			Variables
+			Methods
+			Constructors
+			Static Members (Static Variables and Static Methods)
+			Static Block
+			
+Setting and Getting values of fields:
+	Ideally a class must provide a functionality to work upon individual fields.
+	This is especially for changing the value or retrieving the value of a specific field
+	This is possible by adding a pair of Setters and Getters (Mutators and Accessors)
+	
+	Setter methods typically follow a convention: void setXxx(field-type)
+	Getter methods typically follow a convention: field-type getXxx()		
+	
+	-------------------------------------------------------------
+	
+	'this' reference:
+	Every member method of a Java class gets a hidden parameter known as 'this' 
+	reference.
+	
+	It is a reference that refers to the current object. It is required to resolve the
+	scope of the variable.
+	
+	If local variable name conflicts with permanent field name, then local variable gets a
+	priority
+	
+	-------------------------------------------------------------------
+	
+	Implementing Polymorphism (Reference: Planet Class from package "day2")
+	Polymorphism involves many forms. In Object oriented world, it is of 2 types:
+		Static (Compile Time) and Dynamic (Runtime)
+		
+	Static polymorphism involves methods with same name but different signatures and
+	it is known as Method Overloading
+	
+	A signature is said to be different if one of the following is satisfied:
+		1. Number of parameters are different
+		2. Types of parameters are different
+		3. Sequence of parameters is different
+		
+If a corresponding matching signature method is not found, compiler generates error; hence
+it is known as Static (Compile Time) Polymorphism.
+
+Return types of the methods are not taken into consideration
+
+---------------------------------------------------------------------
+
+Constructors: (Reference: Planet Class from package "day2")
+
+Whenever an object is created, it consists of some values which are known as 
+"Default Values". These values depend upon the field type.
+
+E,g,
+	Integers: 0
+	Fractions: 0.0
+	Character: '\u0000'	(Java follows UNICODE character set to support I18N)
+	Boolean: false
+	Reference (Class Type) : null
+	
+	In order to customize these default values, Java provides a special member known as
+	Constructor.
+	
+	A constructor is a special member within a class that has same name as that of class
+	 name. It gets called implicitly as soon as an object is created. It does not return any
+	 value therefore it does not have return type.
+	 
+	 Like methods, constructors can be overloaded..
+	 
+	 A constructor without any parameter is known as No-Argument constructor.
+	 A constructor with parameters is a known as Parameterized constructor
+	 
+Default Constructor Vs No Argument Constructor
+When a class is created, for every class, Java itself provides a constructor by default.
+That constructor is known as DEFAULT constructor
+
+Whenever any explicit constructor is added within a class that accepts no parameters,
+it is precisely called as No-Argument constructor
+
+When any constructor is added explicitly within a class, the constructor that is provided
+by Java language gets vanished.	 
+	
+-----------------------------------------------------------------------------------------
+
+Static Members	
+	Any thing that is declared within a class is called as member of a class
+	
+	Members are of 2 types:
+			Non Static
+			These are the characteristics associated with a specific object
+				Variables
+					A copy is created for every object hence it is also calles as Instance Variables
+					If not declared 'private', have to be accessed always using an Object reference name
+				Methods
+					Since they perform object specific task, they must be called always using an
+					Object reference name
+					
+					They can make use of 'this' keyword
+					They can make use of static members also
+				Constructors
+				
+			Static (Reference: Book Class)
+			These are the characteristics associated with the whole class rather than
+			with a specific object
+				Variables
+					The copy of the variable is created for the whole class and not for
+					any specific object.
+					Irrespective of the number of object, a single copy is created.
+					Therefore a static variable is also called as a Class Variable.
+					If not declared 'private', can be accessed without using Object using 
+					the format: ClassName.VariableName
+					However it can be accessed using Object reference name also but it is 
+					not recommended.
+				Methods
+					It can be called without Object reference name using the format:
+					ClassName.methodName()
+					However it can be called using Object reference name also but it is 
+					not recommended.
+					
+					They cannot make use of 'this' keyword
+					They can access only static members
+				
+				*** Constructors cannot be static
+				
+				***In case of modifiers, order is not important
+				
+				Static Initialization Block:
+				
+				A block of code that is invoked as soon as the class is loaded. Useful in
+				scenarios to handle the activities during Class Loading. It can also be used
+				to initialize static variables.
+				
+
+				If a class contains a static block along with main() method, static block gets
+				called first. This allows to perform operations prior to the invocation of main().
+
+------------------------------------------------------------------------------------------------------
+
+Memory Mapping (Reference: MemoryMappingMain)
+	In Java, Objects are created using 'new' operator.
+	The 'new' operator allocates memory dynamically from HEAP area and therefore
+	objects are always created on HEAP whereas references are created on STACK.
+	
+	An object may have multiple references but a reference can refer to only one object
+	at a time.
+	
+Garbage Collection
+	It is a background activitiy implemented by Java Runtime System to perform memory
+	de-allocation for the objects which are marked as UNUSED.
+	
+	The object becomes eligible for Garbage Collection and marked as UNUSED when its
+	reference count becomes 0. It is not garbage collected immediately.
+	
+	There is a background process known as Garbage Collector that runs periodically and
+	identifies the objects marked as UNUSED and starts de-allocating memory for them.
+	
+	An object becomes eligible for GC under various circumstances:
+		1. Shifting the reference from one object to another.
+				E.g.
+					Book b1 = new Book();
+					b1 = new Book();
+		2. Explicitly nullifying the reference.
+				E.g.
+					Book b1 = new Book();
+					b1 = null;
+		3. Creating an object without reference
+				E.g.
+					new Book();
+		4. When the object reference goes out of scope
+				E.g.
+					static void create(){
+						Book b1 = new Book();
+					}
+					
+					void main(){
+						create();
+						//At this stage when control returns from create(), object becomes
+						//eligible for GC.
+					}
+	
+TODOs: Course Management System
+	Enhance the CMS as per the following:
+		1. Make use of Constructors, Getters and Setters for Course Entity.
+		2. Create a class CourseProcessor that provides a static method and
+			performs following operations: 
+				The method must create several Course objects using Hard Coded values
+				and return the average of course fees.  
+
+--------------------------------------------------------------------------------------
+
+Parameter Passing: (Reference: ParameterPassingMain)
+Methods can have parameters especially in the form of Primitives and Objects.
+
+In case of primitives, they are passed using BY VALUE mechanism. A copy of a variable
+is created on STACK and it gets passed.
+
+In case of objects, a copy of reference of the object is created on stack rather than
+the actual object, hence they are passed using BY REFERENCE mechanism. 
+
+Working with Arrays: (Ref: ArrayMain)
+Array is a set of similar typed elements stored at contiguous memory locations.
+Used to handle multiple values at one place.
+Every element in array has index which starts from 0.
+
+There are 2 ways to declare arrays:
+	1. Just declaration : Uses '[ ]'
+	2. Declaration and Initialization : Uses '{ }' : It does not make use of 'new'
+	
+Every array in Java is an Object and therefore all arrays are created on HEAP.
+All array objects have a property called as 'length' that indicates size of the array.
+
+Traversing through the array can be simplified using 'for-each' loop
+
+In Java, it is possible to create array dynamically.
+E.g.
+	int size = 3;
+	int numbers[] = new int[size];
+	In the above fragment variable size holds hard coded value but it can be accepted
+	at runtime as well.
+
+Array as Argument (Reference: ArrayAsArgumentMain) 	
+	Since every array is an object, it is quite possible to send array as an argument to 
+	the method or return array as an argument from the method.	
+	
+It is also possible to create an array of Custom Object type. 
+(Reference: ArrayOfObjectsMain)
+
+TODOs:
+	Implement something similar to BookStore for CMS
+	
+
