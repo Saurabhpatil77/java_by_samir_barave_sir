@@ -1,0 +1,88 @@
+	Class Loader:
+	It loads .class files into memory
+
+	Byte Code Verifier:
+	Checks the internal consistency and validity of the code. Once
+	approved, it is given to JVM
+
+	JVM:
+	It acts as an interpreter. It is highly platform dependent.
+
+
+Source File Rules / Concepts:
+
+1. If a class is 'public', file name must match the class name.
+2. The name of the .class file depends upon the name of the class rather
+	than the name of the source file.
+3. It is possible to define multiple classes in a single source file provided
+   not more that one class are public.
+4. The number of .class files depends upon the number of classes and not upon
+	the number of source files.
+
+------------------------------------------------------------------
+
+Implementing OOP using Java
+
+Object Oriented Programming mainly deals with 2 things:
+	1. Class
+		It is a template that decides a structure for an object.
+	2. Object
+		It is an instance of a class.
+
+	Once a class is created, it is possible to create 'n' number of
+	objects of that class.
+
+
+Data Types in Java:
+	Java is a strict typed language. The variables meant for holding
+	a data must be declared of some type.
+
+	Java supports wide range of primitive data types:
+		1. Integers
+			byte, short, int, long
+		2. Fractions
+			float, double
+		3. Character (Single Character)
+			char
+		4. Booleans (YES / NO)
+			boolean
+
+
+Creating Objects:
+	In Java, objects are always created dynamically using 'new' operator.
+	'new' operator allocates memory dynamically.
+
+Implementing Encapsulation:
+	To implement encapsulation, first it is necessary to hide the
+	the data.
+
+	This is possible using 'private' access modifier.
+
+	When a variable is declared as 'private', it can be accessed only
+	within the class.
+
+	To make it accessible, it is necessary to add methods.
+
+
+Course Management System
+	It maintains inventory of various courses and it handles information
+	as per the following:
+		Course ID (Numeric)
+		Course Title (Character)
+		Course Duration (Numeric in terms of Hrs)
+		Course Provider (Character)
+		Course Cost (Fraction)
+
+	Handle Abstraction and Encapsulation.
+
+	Store and Print information about 2 to 3 courses.
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
