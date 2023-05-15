@@ -1,0 +1,128 @@
+package day2;
+
+public class BookMain {
+	static {
+		System.out.println("Main class is getting loaded.");
+	}
+
+	static public void main(String[] args) {
+		System.out.println("Application begins...");
+		Book firstBook = new Book();
+		Book secondBook = new Book(2, "React Unleashed", 1023.45f);
+		int currentBookCount = Book.bookCount;
+		System.out.println("Current Book Count: " + currentBookCount);
+		
+		//Creating 5 more objects
+		for(int a=1;a<=5;a++) {
+			Book b = new Book();
+		}
+		int latestBookCount = Book.bookCount;
+		System.out.println("Current Book Count: " + latestBookCount);
+		
+		//Invoke getTotalBooks() to get the total books
+		System.out.println(Book.getTotalBooks());
+		
+
+	}
+
+}
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+
+package day2;
+
+public class Book {
+	static {
+		System.out.println("Book class is getting loaded.");
+	}
+	private int bookId;
+	private String title;
+	private float price;
+	static int bookCount;//Holds the count of books. Since one copy is enough, it is declared as 'static'
+	static private int totalBooks;//Holds the count of books but this time it is 'private'
+	public Book() {
+		bookId = 1;
+		title = "Thinking in Java";
+		price = 750.50f;
+		bookCount++;
+		totalBooks++;
+	}
+	public Book(int bookId, String title, float price) {
+		this.bookId = bookId;
+		this.title = title;
+		this.price = price;
+		bookCount++;
+		totalBooks++;
+	}
+	public int getBookId() {
+		return bookId;
+	}
+	public void setBookId(int bookId) {
+		this.bookId = bookId;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public float getPrice() {
+		return price;
+	}
+	public void setPrice(float price) {
+		this.price = price;
+	}
+	public static int getTotalBooks() {//Since this method is 'static' can be called without object
+		return totalBooks;
+	}
+	
+
+}
+
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+package day2;
+
+public class BookStore {
+	private static Book[] bookData;
+	
+	static {
+		bookData = new Book[3];
+		Book b1 = new Book();
+		Book b2 = new Book(102, "Let us C", 500);
+		Book b3 = new Book(103, "Let us C++", 600);
+		bookData[0] = b1;
+		bookData[1] = b2;
+		bookData[2] = b3;
+	}
+	
+	public static String[] getAllBookTitles() {
+		int size = bookData.length;
+		String titles[] = new String[size];
+		int index = 0;
+		for(Book currentBook : bookData) {
+			String currentTitle = currentBook.getTitle();
+			titles[index] = currentTitle;
+			index++;			
+		}
+		return titles;
+	}
+	
+	public static float getAvgPrice() {
+		//Complete this method (Assigment)
+		return 0.0f;
+	}
+
+}
+
+
+
+-------------------------------------------------------------------------------------------------------
