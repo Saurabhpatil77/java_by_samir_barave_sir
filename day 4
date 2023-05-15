@@ -1,0 +1,345 @@
+Wrapper Classes (Reference: WrapperClassesMain)
+
+Sometimes there is a need to represent primitives in the form of objects.
+For every primitive type, Java provides a Class counterpart known as Wrapper or
+Wrapper Class.
+
+E.g.
+Primitive Type				Wrapper Class
+	byte									Byte
+	short								Short
+	long									Long
+	int									Integer
+	float									Float
+	double								Double
+	char									Character
+	boolean								Boolean
+	
+	E.g.
+	Conversion of 'int' to Integer:
+	int x = 100;
+	Integer i = new Integer(x);
+	
+	Reverse Conversion: from Integer to 'int'
+	int y = i.intValue();
+	
+	The above fragment was required till Java 1.4 but since Java 1,5 it is more simplified.
+	Java 1.5 offers 2 features: Auto-boxing and Unboxing 
+	
+	Wrapper classes are also used to convert a qualified String into the respective 
+	primitive type. This is frequently required in GUI based applications.
+	
+	E.g.
+	int x = Integer.parseInt("1234");
+	In the above statement String "1234" gets converted to int with value 1234
+	------------------------------------------------------------------------------------------
+	StringBuilder (Reference: StringBuilderMain):
+		A class from java.lang package that is used for String manipulation.
+		
+		It is also possible to manipulate String data using String class but it causes 
+		performance implications because Strings are immutable.
+		
+		Every single manipulation results into a new object creation.
+		
+		To address this, Java provides StringBuilder which follows mutable sequence
+		of characters. It provides several overloaded append() method to perform
+		manipulation.
+	---------------------------------------------------------------------------------------------
+	
+	Abstract Classes: (Reference: AbstractClassMain)
+	
+	In Java sometimes a class may have a method without definition. Any method which
+	is not defined but declared is referred as Abstract method.
+	
+	E.g.
+	public class Shape {
+		public void draw();
+	}
+	
+	The above code fragment is just for understanding the concept of Abstract method but
+	in reality it is not a valid code because whenever any method is to be declared and not
+	defined, Java enforces to attach one modifier: 'abstract'
+	
+	E.g.
+	public class Shape {
+		abstract public void draw();
+	}
+	
+	The above fragment uses 'abstract' modifier but still it is not valid because when any
+	class that declares at least one method as 'abstract', it must be declared 'abstract' and
+	such a class is known as Abstract class.
+	
+	E.g.
+	abstract public class Shape {
+		abstract public void draw();
+	}
+	Now the above fragment is valid.
+	
+	If a class contains any one method abstract, it must be declared abstract however
+	it is possible declare a class as abstract without any single method abstract.
+	
+	The modifier 'abstract' cannot be applied for:
+		1. Constructors
+		2. Static Methods
+		3. Variables
+		
+		Once a class is declared 'abstract' it cannot be instantiated.
+		It is further used by creating its subclass.
+		
+		Any subclass of an abstract class must implement all the abstract methods of
+		that class otherwise must be declared 'abstract' .
+		
+		Even though an abstract class cannot be instantiated, it is possible to declare
+		a reference of that type.
+		
+		Abstract classes may have concrete (Non-abstract, Implemented) methods
+		
+-----------------------------------------------------------------------------------------
+
+Introducing 'final':
+	A keyword in Java that is used to declare variables immutable.
+	
+	E.g.
+	final float pi = 3.14f;		
+	The above statement makes the variable 'pi' as final. Any attempt to make changes
+	results into compilation error.
+	
+	If a final variable is a reference to an object, it is the reference that must stay
+	the same and not the object.	
+		
+	E.g.
+	final City c1 = new City("Pune");
+	c1.setName("Mumbai");	
+	The above statement is still valid because the reference still stays the same.
+	
+	c1 = new City("Mumbai");
+	The above statement is invalid because the  reference tends to shift from 1st object
+	to 2nd which is not possible since it is declared as 'final'
+	
+	'final' can also be used in case of methods to prevent method overriding.
+	Any method declared as 'final' cannot be overridden.
+	If a method is declared as 'private', it cannot be overridden and therefore 
+	'private' methods are implicitly 'final'
+	
+	'final' can also be used in case of classes to prevent inheritance.
+	Any class declared as 'final' cannot be inherited.
+	If a class is declared as 'final', all the methods of that class become 'final' by default.
+	
+	All Wrapper Classes including String are declared as 'final'.
+	
+	Modifiers 'abstract' and 'final' cannot appear together.
+	
+	------------------------------------------------------------------------------------------
+	
+	Interfaces: (InterfaceExampleMain)
+	
+	What is Interface:
+		Interface is a collection of abstract methods and possibly 'final' variables.
+		Used to declare the methods where implementation is not available.
+		
+	Creating Interface:
+	Interface is created using 'interface' keyword
+	
+	Like abstract classes, interfaces cannot be instantiated.
+	To use an interface further, there has to be some class which implements that
+	interface and it is possible using 'implements' keyword.
+	
+	DollarToRupeeConverter impl CurrencyConverter
+	RupeeToPoundConverter impl CurrencyConverter
+	E.g.
+	class MyClass implements MyInterface { ...} 
+	
+	Whenever a class implements an interface, it must define all the methods from that
+	interface otherwise it must be declared 'abstract'
+	
+	Even though an interface cannot be instantiated, it is possible to declare
+	a reference of that type and that reference can refer to an object of a class
+	which implements that interface
+	
+	Why Interfaces?
+	Intefaces are mainly used to accomplish following things:
+		1.. Expanding the scope of polymorphism
+		2. Achieving multiple inheritance in terms of behaviours.
+			A class can extend only one class but can implement multiple interfaces
+			
+			E.g.
+			public class Painting implements Drawing, Filling, Decorating { }
+			In the above statement, Drawing, Filling and Decorating are interfaces.
+	
+	Basic Rules / Concepts:
+		1. Methods declared within a public interface are by default public and abstract.
+		2. Variables declared within a public interface are by default public, static and final.
+		3. A class can implement multiple interfaces
+		4. An interface can be implemented by multiple classes
+		5. An interface can extend multiple interfaces
+			(Java supports multiple inheritance for interfaces and not for classes)
+
+-----------------------------------------------------------------------------------------
+Exception Handling:
+
+What is exception:
+An error that occurs during program's execution is known as Exception.
+
+In general, errors are of 2 types:
+		Compile Time Errors ---> errors
+		Runtime Errors ----> exceptions
+
+Exception Handling is an object oriented way of handling runtime errors.
+Exceptions are the actual objects created by JRE.
+These objects contain error information.
+
+Handling exceptions in Java:
+To handle exceptions, Java provides 2 basic keyword:
+	1. try
+			Used to enclose the statements which are probable to fire an exception
+			It is used in the form of block.
+			E.g.
+				try {
+						Statement 1
+						Statement 2
+						...
+					}
+						
+	2. catch
+			Used as an exception handler. 
+			It is used in the form of block.
+			Statements written inside 'catch' block execute when an exception is raised.
+			E.g.
+				catch(ExceptionType var-name){
+					Statement 1
+					Statement 2
+				.	..
+				}
+
+
+How exceptions are raised?
+Exceptions are raised by JRE.
+
+JRE identifies the abnormal situation and maps it to the corresponding exception specific
+class. 
+
+E.g.
+			Abnormal Situation								Exception Class
+			Index out of bounds							ArrayIndexOutOfBoundsException
+			Access to null value								NullPointerException
+			Divide by Zero										ArithmeticException
+			
+Once the class is mapped, it creates an object of that class and checks whether the 
+statement which has fired that exception; is enclosed within a 'try' block or not.
+
+If enclosed, searches for the relevant 'catch' block and once found, executes that 
+'catch' block otherwise generates predefined message associated with that exception.
+
+If not enclosed, generates predefined message associated with that exception.
+
+Exception Hierarchy:
+The topmost class in Exception Hierarchy is Throwable from java.lang
+It has 2 subclasses: Error and Exception
+
+Error: 
+	It indicates resource exhaustion in JVM. It is rare but fatal. It is not under the
+	control of a developer.
+Exception:
+	It is frequent but not fatal. It is under the control of a developer.
+	
+Types of Exceptions:
+	Exceptions are divided into 2 types:
+	
+		1. Unchecked Exceptions (Runtime Exceptions)
+			These are the exceptions for which compiler does not enforce to handle them.
+			These exceptions are expressed using a predefined class: RuntimeException
+			Any class descended from RuntimeException is a runtime exception or unchecked
+			exception.
+			E.g.
+				ArrayIndexOutOfBoundsException, NullPointerException etc.
+		2. Checked Exceptions
+			These are the exceptions for which compiler enforces to handle them otherwise
+			compilation error gets generated.
+			
+			Any class which is not a descendant of RuntimeException is a checked exception.
+			E.g.
+				FileNotFoundException
+				
+Handling multiple exceptions (Reference: MultipleExceptionHandlerMain):
+		It is possible to handle multiple exceptions using multiple 'catch' blocks.
+		
+	
+	
+	
+	
+	
+	
+	
+		
+	
+	
+	
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+	
+	
+	
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
