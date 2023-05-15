@@ -1,0 +1,25 @@
+package day2;
+
+public class MemoryMappingMain {
+
+	public static void main(String[] args) {
+		//Book b1 = new Book();
+		Book b1;//Here 'b1' is not an object, it is a reference and it is created on stack
+		b1 = new Book();//Reference Count of first object: 1
+		
+		Book b2 = new Book();//Reference Count of second object: 1
+		Book b3 = b2;//Reference Count of second object: 2
+		//Here the new object is not created but a reference 'b3' is created which refers
+		//to the same object as that of 'b2'
+		b2 = new Book(); //Here reference 'b2' starts referring to the newly created object
+		//Reference Count of second object: 1
+		//Reference Count of third object: 1
+		
+		b1 = new Book();//Reference 'b1' starts referring to fourth object
+		//Reference Count of fourth object: 1
+		//Reference Count of first object: 0
+		
+
+	}
+
+}
