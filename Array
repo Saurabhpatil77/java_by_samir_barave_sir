@@ -1,0 +1,105 @@
+package day2;
+
+public class ArrayMain {
+
+	public static void main(String[] args) {
+		int numbers[] = new int[5];
+		//Declares an array of type 'int' named as 'numbers' with dimension 5
+		numbers[0] = 67;
+		numbers[1] = 167;
+		numbers[2] = 27;
+		numbers[3] = 455;
+		numbers[4] = 545;
+		//The above fragment initialized the array
+		
+		/*int size = numbers.length;
+		for(int index = 0; index < size; index++) {
+			int number = numbers[index];
+			System.out.println(number);
+		}*/
+		//Using FOR-EACH
+		for(int number : numbers) 
+			System.out.println(number);
+		
+		String[] fruits = {"Mango", "Apple", "Watermelon", "Orange", "Guava"};
+		//Declares and initializes a String array
+		for(String fr : fruits) {
+			System.out.println(fr.toUpperCase());
+		}
+		
+
+	}
+
+	
+}
+
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+package day2;
+
+public class ArrayOfObjectsMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String[] allTitles = BookStore.getAllBookTitles();
+		for(String title : allTitles)
+			System.out.println(title.toUpperCase());
+
+	}
+
+}
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+
+
+package day2;
+
+public class ArrayAsArgumentMain {
+	private static void printFlowerNames(String [] flowerNames) {
+		for(String name : flowerNames)
+			System.out.println(name.toUpperCase());
+	}
+	
+	private static double[] getSquareRoots(int[] numberList) {
+		//Retrieve size of the incoming array
+		int size = numberList.length;
+		//Declare an array of type 'double' using the size
+		double squareRoots[] = new double[size];
+		int index = 0;
+		for(int num : numberList) {
+			double sqRoot = Math.sqrt(num);//Finds a Square Root and returns it
+			squareRoots[index] = sqRoot;
+			index++;
+		}
+		return squareRoots;		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String flowers[] = {"Lotus", "Rose", "Sunflower"};
+		printFlowerNames(flowers);
+		System.out.println("======================================");
+		int numbers[] = {45, 23, 16, 9, 29};
+		double[] squareRoots = getSquareRoots(numbers);
+		for(double sqRoot : squareRoots)
+			System.out.println(sqRoot);
+		
+
+	}
+
+}
+
+
+
+
+
+
+
+
