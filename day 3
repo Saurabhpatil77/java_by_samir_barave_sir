@@ -1,0 +1,282 @@
+Associations / Relationships in Java
+
+In Java, relationships are of 2 types:
+	HAS-A
+	It deals with one object containing another object or several objects.
+	This is known as Containment
+	E.g.
+	class Engine {
+		private String typeOfFuel;
+		private String power;
+		//Remaining code
+	}
+	class Car {
+		private int id;
+		private String make, model;
+		private Engine engineDetails;
+		//Remaining code
+	}
+	
+	IS-A
+	It deals with Parent-Child association. That is inheriting the properties from Base class.
+	This is known as Inheritance
+	
+	E.g.
+	Car and SportsCar
+	Player and CricketPlayer
+	
+	Inheritance involves one class extending another class which is expressed using
+	'extends' keyword.
+	
+	E.g.
+	
+	class Player {....}
+	class CricketPlayer extends Player {...} (Reference: SimpleInheritanceMain)
+	
+	In Java, inheritance is of 3 types:
+		1. Simple
+		2. Multilevel
+		3. Hierarchical
+		
+	Java does not support Multiple and Hybrid inheritance
+	Inheritance in Java is always public
+	
+	Constructors in Inheritance:
+	When constructors are defined within inherited classes, their order of invocation is
+	from Bottom to Top where as the order of execution is from Top to Bottom.
+	
+	In case of no-argument constructor, a call to the parent class constructor is implicit
+	because of the default mechanism of 'super()' keyword.
+	
+	The keyword 'super' is used to give a call to the super class constructor.
+	'super' refers to immediate super class.
+	
+	Use of 'super' is required especially in case of parameterized contructors.
+	
+	Since there might be multiple versions of parameterized constructors available
+	in the base class, it is required to specify which constructor is to be invoked.
+	
+	This is done by giving a call explicitly using 'super'
+	
+	'super' if used, must be the first statement in the constructor.
+	If not used, parent class uses its no-argument constructor
+	
+	--------------------------------------------------------------------------------
+	
+	Dynamic Polymorphism:
+	This is the 2nd type of polymorphism which is also known as Runtime Polymorphism.
+	It is achieved through Method Overriding using Inheritance.
+	
+	The pre-requisite for Method Overriding is Inheritance.
+	
+	Method Overriding: (Reference: MethodOverridingMain)
+	Methods with same name, same signature, same return type defined within inherited
+	classes are called as overridden methods.
+	E.g.
+		class Base {
+			int myMethod(String s){ ... }
+		}
+		class Derived extends Base {
+			int myMethod(String s){ ... }
+		}
+	
+	Why Overriding? 
+	Overriding is required to modify the behaviour of an existing method to suit the
+	new requirement.
+	
+	How Dynamic Polymorphism takes place?
+	In Java, every object is manipulated or handled using some reference.
+	Every reference has 2 types: static and dynamic
+	
+	In method overriding, dynamic type governs method selection.
+	
+	When classes represent IS-A relationship, it is possible to declare a reference of
+	a base class referring to an object of derived class.
+	
+	E.g.
+	Base b1 = new Derived();
+	In the above fragment, the static type of 'b1' is Base whereas its dynamic type is
+	Derived.	
+	
+	Hence b1.myMethod(..) results into invocation of myMethod() from Derived class
+	However reverse is not possible.
+	E.g.
+		Derived d = new Base() results into error 
+		
+	When an object of derived class is created using a reference of base class, it is 
+	not possible to call the methods using that reference which are not present in the
+	base class.
+	
+	To invoke such methods, an explicit cast is necessary.
+	
+Method Overriding can be used to handle 2 activities:
+	1. Replacement
+		The method from derived class replaces the method from base class
+	2. Extension (Reference: MethodOverridingExtensionMain)
+		The method from derived class extends the functionality of the method from
+		base class.
+		
+		This can be achieved using 'super'
+		E.g.
+		
+		super.methodName();
+		
+TODOs:
+	Enhance CMS as per the following
+	
+	Create a class CourseOperation with following method:
+			float getData(Course [])
+	Create a subclass of CourseOperation as CourseCostOperation in such a way that
+	it overrides "float getData(Course [])" that returns Average Cost of all courses.
+	
+	Create one more subclass of CourseOperation as CourseDurationOperation in such a way 
+	that it overrides "float getData(Course [])" that returns Average Duration of all 
+	courses.
+	
+-----------------------------------------------------------------------------------------------
+
+Package:
+	Package is a collection / group of classes and other type declarations e.g.
+	Interfaces, Annotations, Enums, Records etc.
+	
+	Benefits:
+	Allows to keep libraries isolated from other libraries.
+	Used to reduce naming conflicts
+	
+	Creating package:
+	Packages are created using 'package' statement. It must be the first statement
+	within a source file
+	
+	Accessing classes from Packages:
+	If 2 or multiple classes are defined in same package, they can access each other 
+	directly irrespective of whether they are declared 'public' or not.
+	
+	If one class depends upon another class and if both the classes are in different 
+	packages, then the class which is being used must be made accessible outside the
+	package and this is done using 'public' access modifier.
+	
+	Once a class is declared as 'public' it can be exported outside the package and any
+	class from different package can import that class. This is done using 'import' 
+	statement.
+	
+	How packages are stored?
+	
+	Packages are stored in the form of folders whereas classes are stored in the form
+	of '.class' files
+	
+	E.g.
+	The statement: "class IceCream is a part of package day3_dessert" means
+	There is a folder: day3_dessert containing a file: IceCream.class
+	
+	It is also possible to create package inside another package. It is called as sub-package.
+	This can be done upto any level.
+	
+	Default Package:
+	Whenever a class is created without any package, it becomes a part of some package
+	by default which is called as Default Package.
+	
+	The use of Default Package is discouraged.
+	
+	The classes from explicitly created packages can be imported just by using 
+	'import' statement whereas the classes from Default Package can be used only by
+	other classes which are also from Default Package.
+	
+	Access Modifiers revisited:
+		In Java, access modifiers are of 4 types:
+			1. private
+				Accessible only within the class
+			2. public
+				Accessible from anywhere
+			3. protected
+				Accessible through out the whole package as well as outside the package if
+				the class is a sub class.
+			4. <<DEFAULT>>
+				Accessible through out the whole package but not outside that.
+		
+		As long as same package is used, there is no difference among public, protected
+		and DEFAULT. 
+		
+		When different packages are used, they behave differently.
+		
+	Exploring Predefined Classes of Java:
+	Since having a class within a Default Package is discouraged, definitely predefined 
+	classes of Java are belonging to some packages. Java follows standard practices.
+	
+	Java provides number of predefined packages; but one of them is frequently used
+	which "java.lang"
+	
+	The speciality of "java.lang" is it is imported by default. Therefore whatever 
+	public declarations are present in "java.lang" are directly available to developers.
+	
+	E.g.
+		String
+		System
+		
+	java.lang provides wide range of classes:
+		E.g.
+			Object
+			It is a cosmic super class in Java. It is the ultimate ancestor.
+			Every class in Java by default inherits Object class.
+			
+			Therefore a reference of type Object can refer to an object any class.
+			E,g,
+			Object obj = new Employee();
+			Object obj2 = new Department();
+			
+			Object class provides basic foundation using several methods.
+				E.g.
+					toString() (Reference: ToStringMain)
+					Prototype: public String toString()
+					Usage: Used to represent any object in the form of String
+					
+					When any object is passed as a parameter to System.out.println(),
+					JRE identifies dynamic type of the object reference and searches
+					for toString() method in the respective class.
+					
+					If found, invokes that method otherwise invokes method from the base
+					class which is Object class.
+					
+					The default implementatio of toString() from Object class returns String
+					holding Address of the object.
+					
+					To get the actual contents, it is necessary to override it.
+					
+					A call to the method toString() can be explicit or implicit.
+					
+					Any method that gets called implicitly by JRE is known as Callback 
+					Method.
+					
+					finalize()
+					Prototype: protected void finalize()
+					Usage: Used to perform clean up operations when object is getting
+								Garbage Collected.
+					It has to be overridden in the respective class.
+					
+					equals() (Reference: EqualsMain)
+					Prototype: public boolean equals(Object)
+					Usage: Used to test the objects for equality.
+					
+					When objects are compared for equality using '==', it is checked whether
+					the 2 references share same memory or not. If they share same memory,
+					returns 'true' otherwise 'false'.
+					
+					It is also possible to compare objects for equality using equals().
+					The default implementation from Object class behaves same as that of
+					'==' operator.
+					
+					This in insuffiencient from Project's perspective. Hence to compare them
+					for equality against data, it is necessary to override equals()
+					
+TODOs:
+	Enhance CMS as per the following:
+	
+	Modify class CourseStore with additional methods:
+	
+	public static boolean isAvailable(Course)
+		The method must accept a Course object from caller and return the status of
+		availability. Display appropriate message 
+	
+	public static float getAvgDuration(String providerName)
+		The method must accept the name of the course provider and return the average
+		duration accordingly.
+			
