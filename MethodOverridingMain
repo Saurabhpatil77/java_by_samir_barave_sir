@@ -1,0 +1,149 @@
+package day3;
+
+public class MethodOverridingMain {
+
+	public static void main(String[] args) {
+		/*
+		 * OfflineTraining offTrg = new OfflineTraining(); OnlineTraining onTrg = new
+		 * OnlineTraining();
+		 * 
+		 * offTrg.conduct(); onTrg.conduct();
+		 */
+		
+		Training trg;
+		trg = new OfflineTraining();
+		
+		OfflineTraining ofTrg = (OfflineTraining)trg;
+		ofTrg.setVenue("YCP");
+		//((OfflineTraining)trg).setVenue("YCP");
+		trg.conduct();
+		System.out.println(ofTrg.getVenue());
+		//trg.setVenue(); This results into error because setVenue() is undefined in Training
+		
+		trg = new OnlineTraining();
+		trg.conduct();
+		
+	
+	}
+
+}
+
+
+----------------------------------------------------------------------------
+
+
+package day3;
+
+public class Training {
+	private String moduleName;
+	private int duration;
+	public Training() {
+		// TODO Auto-generated constructor stub
+	}
+	public Training(String moduleName, int duration) {
+		this.moduleName = moduleName;
+		this.duration = duration;
+	}
+	public String getModuleName() {
+		return moduleName;
+	}
+	public void setModuleName(String moduleName) {
+		this.moduleName = moduleName;
+	}
+	public int getDuration() {
+		return duration;
+	}
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+	public void conduct() {	
+		//System.out.println("Conduct the training");
+	}
+	
+	public String getDetails() {
+		String details = "Module: " + moduleName + ", Duration (Days): " + duration;
+		return details;
+	}
+	
+
+}
+-----------------------------------------------------------------------------------
+
+
+
+package day3;
+
+public class OfflineTraining extends Training {
+	private String venue;
+	public OfflineTraining() {
+		
+	}
+	public OfflineTraining(String moduleName, int duration, String venue) {
+		super(moduleName, duration);
+		this.venue = venue;
+	}
+	public String getVenue() {
+		return venue;
+	}
+	public void setVenue(String venue) {
+		this.venue = venue;
+	}
+	public void conduct() {	
+		System.out.println("Visit the venue and conduct the training");
+	}
+	public String getDetails() {
+		String finalDetails = super.getDetails() + ", Venue: " + venue;
+		return finalDetails;
+	}
+	
+}
+------------------------------------------------------------------------
+
+
+
+package day3;
+
+public class OnlineTraining extends Training {
+	private String meetingLink;
+	public OnlineTraining() {
+		
+	}
+	public OnlineTraining(String moduleName, int duration, String meetingLink) {
+		super(moduleName, duration);
+		this.meetingLink = meetingLink;
+	}
+	public String getMeetingLink() {
+		return meetingLink;
+	}
+	public void setMeetingLink(String meetingLink) {
+		this.meetingLink = meetingLink;
+	}
+	
+	public void conduct() {
+		System.out.println("Join the meeting link and conduct the training");
+	}
+
+	public String getDetails() {
+		String finalDetails = super.getDetails() + ", Meeting Link: " + meetingLink;
+		return finalDetails;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
