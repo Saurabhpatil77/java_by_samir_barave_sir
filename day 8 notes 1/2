@@ -1,0 +1,181 @@
+RandomAccessFile (Reference: RandomAccessFileMain)
+	Like java.io.File, RandomAccessFile does not belong to any InputStream or OutputStream.
+	It directly inherits Object class.
+	It is used to place file pointer anywhere in the file using seek() method.
+	It can be used to perform reading as well as writing	 
+	
+Stream Categories:
+	Stream are divided into 2 categories:
+		Byte Streams
+			They work upon 8-bit data.
+			They fall under InputStream and OutputStream
+		Character Streams 
+			They work upon 16-bit data.
+			Especially used to read unicode characters.
+			They fall under Reader and Writer
+		
+		Like byte streams, java.io package provides variety of character streams.
+		E.g.
+			FileReader, FileWriter
+			BufferedReader, BufferedWriter
+			and so on.
+			
+		BufferedReader (Reference: BufferedReaderMain)
+		It is a character stream used to apply buffering model on some Reader.
+		It provides a utility method: readLine() that is used to read the whole line.
+		
+		When EOF is encountered, readLine() returns 'null'
+		
+		Since BufferedReader can be used to read the contents line-by-line, it makes 
+		possible to fetch an information from the file and build Java objects accordingly.
+		(Reference: BufferedReaderForObjectCreationMain)
+		
+System Class:
+	A class from java.lang package.
+	Useful to print something on the console or to accept an input from end user.
+	
+	It provides several public static final variables e.g. 'in' and 'out'.
+	
+	'out' is declared of type java.io.PrintStream whereas 'in' is declared of type
+	java.io.InputStream
+	
+	'out' represents console and 'in' represents Input Device which is keyboard.
+	
+	Hence, while accepting user input, it is necessary to open an InputStream which is
+	specific to the Input Device (Keyboard).
+	
+	It is done by using "System.in".
+	
+	In early days, it was done using BufferedReader but in that case a conversion was 
+	required explicitly.
+	
+	E.g.
+		String to int: Integer.parseInt()
+		String to float: Float.parseFloat()
+		
+	This is simplified by Java 1.5 through a utility class known as Scanner which belongs
+	to java.util package.
+	
+	It handles conversion implicitly using several nextXXX() methods.
+	E.g.
+		To read 'int': nextInt()
+		To read 'float': nextFloat()
+	(Reference: UserInputMain)	
+	
+	***If a String data is being captured after some other information, an extra call to 
+	nextLine() is necessary.
+	
+	Serialization:
+			State of an object:
+			State encapsulates current values available in the object. These values are 
+			temporary because eventually the object becomes eligible for Garbage Collection.
+			Once it gets destroyed, all the information is lost.
+			
+			Sometimes, it is necessary to preserve this information for future use. This is
+			possible using Serialization.
+			
+			What is Serialization:
+			The process of storing state of an object to some permanent persistent store
+			is known as Serialization.
+			
+			Serialization does not store only data of an object; rather it stores the entire
+			object in a byte-stream format.
+			
+			This avoids performing extra processing while retrieving the state back.
+			
+			Once a state is serialized, any time it can be retrieved back using De-Serialization.
+			
+			What is De-Serialization?
+			Retrieving the state back is known as De-Serialization
+			
+			Implementing Serialization (Reference: SerializationMain) 
+					and Deserialization (Reference: DeserializationMain)
+					
+				To implement Serialization and Deserialization, java.io package provides an
+				API known as Serialization API. 	
+				
+				It mainly consists of: 
+						1. Serializable
+							An interface that needs to be implemented by a class of which an
+							object is to be serialized.
+							
+							It is a marker interface. It does not have any method. 
+							
+							If not implemented and if the object is about to get serialized,
+							JRE throws exception: NotSerializableException
+							
+						2. ObjectOutputStream
+							A sub class of OutputStream which is used to actually perform 
+							serialization.
+							It uses OutputStream as a target. 
+							It provides a method: void writeObject(Object) to perform serialization.
+							
+						3. ObjectInputStream	
+							A sub class of InputStream which is used to actually perform 
+							de-serialization.
+							It uses InputStream as a source.
+							It provides a method: Object readObject() to perform deserialization.
+							
+Serialization Further Concepts:
+	Sometimes an object may hold some confidential or sensitive information. In such 
+	cases, it is required to perform encryption while serialization and decryption while
+	deserialization.
+	
+	Serializable interface does not have control over encryption and decryption because
+	it is a marker interface (Without any method).
+	
+	To have full controll over encryption and decryption, java.io package provides an
+	interface: Externalizable
+	
+	It is a sub interface of Serializable and it provides 2 methods:
+		writeExternal() and readExternal()
+		
+		writeExternal() is used to provide encryption logic and it gets invoked implicitly when
+		the object is getting serialized.
+		
+		readExternal() is used to provide decryption logic and it gets invoked implicitly when
+		the object is getting deserialized.
+		
+		If a class of which an object is being serialized, declares a 'static' variable, its 
+		state does not get serialized.
+		
+		It gets initialized to default value during deserialization.
+		E.g. int - 0, float - 0.0, boolean - false and so on.
+		
+		Sometimes it might be required to avoid serialization of a specific variable which is
+		not 'static'.
+		
+		To accomplish this, Java provides a keyword: 'transient' which avoids serialization
+		for that particular variable.
+		
+		E.g. 
+		public class A implements Serializable {
+			private int x;//Gets serialized
+			private static int y;//Static Variable: Does not get serialized
+			private transient int z;//Non static Variable: Does not get serialized
+			....
+		}
+			
+		Transient variable gets initialized to default value during deserialization.
+		
+TODOs:
+	Enhance CMS as per the following:
+	Write a Java program to accomplish following things:
+		1. Declare an array of 3 Course objects.
+		2. Accept user input to fill the information into this array.
+		3. Store this entire array into some file using Serialization
+		
+	Write another program to accomplish following things:
+		1. Deserialize the entire array.
+		2. Print average cost of the courses
+		
+		
+	
+		
+		
+			
+			
+			
+			
+			
+			
